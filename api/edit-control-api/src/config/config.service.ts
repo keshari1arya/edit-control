@@ -51,7 +51,7 @@ class ConfigService {
       ssl: this.isProduction(),
       synchronize: true,
       autoLoadEntities: this.getValue('AUTO_LOAD_ENTITIES', false) === 'true',
-      dropSchema: true,
+      // dropSchema: true,
     };
   }
 }
