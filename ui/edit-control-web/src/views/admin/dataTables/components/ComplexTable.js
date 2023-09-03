@@ -135,7 +135,7 @@ export default function ColumnsTable(props) {
                         </Text>
                       </Flex>
                     );
-                  } else if (cell.column.Header === "DATE") {
+                  } else if (cell.column.Header === "TAT" || cell.column.Header === "GO LIVE") {
                     data = (
                       <Text color={textColor} fontSize='sm' fontWeight='700'>
                         {cell.value}

@@ -19,14 +19,16 @@ import RTL from "views/admin/rtl";
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
 import { AddOrEditTask } from "views/task/edit";
+import { ListTask } from "views/task/list";
 
 const routes = [
-  // {
-  //   name: 'Home',
-  //   layout:'/admin',
-  //   path: '/',
-  //   component: AddOrEditTask
-  // },
+  {
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    name: 'Home',
+    layout:'/admin',
+    path: '/abc',
+    component: ListTask
+  },
   {
     name: "Main Dashboard",
     layout: "/admin",
@@ -35,7 +37,7 @@ const routes = [
     component: MainDashboard,
   },
   {
-    name: "NFT Marketplace",
+    name: "NFT Marketplace1",
     layout: "/admin",
     path: "/nft-marketplace",
     icon: (
