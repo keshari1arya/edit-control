@@ -20,14 +20,22 @@ import RTL from "views/admin/rtl";
 import SignInCentered from "views/auth/signIn";
 import { AddOrEditTask } from "views/task/edit";
 import { ListTask } from "views/task/list";
+import EditTask from "views/task/edit/editTask";
 
 const routes = [
   {
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     name: 'Home',
     layout:'/admin',
-    path: '/abc',
+    path: '/tasks',
     component: ListTask
+  },
+  {
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    name: 'Edit Task',
+    layout:'/admin',
+    path: '/task/new',
+    component: EditTask
   },
   {
     name: "Main Dashboard",

@@ -2,25 +2,21 @@
 import React from "react";
 // Chakra imports
 import {
-  Box,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-  useColorModeValue,
+    Box,
+    Flex,
+    FormControl,
+    FormLabel,
+    Heading,
+    Input,
+    InputGroup,
+    Text,
+    Textarea,
+    useColorModeValue,
+    Button
 } from "@chakra-ui/react";
 // Custom components
-import { HSeparator } from "components/separator/Separator";
-import DefaultAuth from "layouts/auth/Default";
 // Assets
-import illustration from "assets/img/auth/auth.png";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
+import Card from "components/card/Card";
 
 export default function EditTask() {
     const textColor = useColorModeValue("navy.700", "white");
@@ -31,7 +27,9 @@ export default function EditTask() {
     const handleClick = () => setShow(!show);
 
     return (
-        <DefaultAuth illustrationBackground={illustration} image={illustration}>
+        // <DefaultAuth illustrationBackground={illustration} image={illustration}>
+        <Card>
+            {/* <CardBody> */}
             <Flex
                 maxW={{ base: "100%", md: "max-content" }}
                 w='100%'
@@ -46,7 +44,7 @@ export default function EditTask() {
                 flexDirection='column'>
                 <Box me='auto'>
                     <Heading color={textColor} fontSize='36px' mb='10px'>
-                        Sign In
+                        Create A Task
                     </Heading>
                     <Text
                         mb='36px'
@@ -54,7 +52,7 @@ export default function EditTask() {
                         color={textColorSecondary}
                         fontWeight='400'
                         fontSize='md'>
-                        Enter your email and password to sign in!
+                        Once Task Created you will be able to upload media
                     </Text>
                 </Box>
                 <Flex
@@ -67,14 +65,14 @@ export default function EditTask() {
                     mx={{ base: "auto", lg: "unset" }}
                     me='auto'
                     mb={{ base: "20px", md: "auto" }}>
-                    
-                    <Flex align='center' mb='25px'>
-                        <HSeparator />
-                        <Text color='gray.400' mx='14px'>
-                            or
-                        </Text>
-                        <HSeparator />
-                    </Flex>
+
+                    {/* <Flex align='center' mb='25px'>
+                            <HSeparator />
+                            <Text color='gray.400' mx='14px'>
+                                or
+                            </Text>
+                            <HSeparator />
+                        </Flex> */}
                     <FormControl>
                         <FormLabel
                             display='flex'
@@ -83,14 +81,14 @@ export default function EditTask() {
                             fontWeight='500'
                             color={textColor}
                             mb='8px'>
-                            Email<Text color={brandStars}>*</Text>
+                            Name<Text color={brandStars}>*</Text>
                         </FormLabel>
                         <Input
                             isRequired={true}
-                            variant='auth'
+                            // variant='auth'
                             fontSize='sm'
                             ms={{ base: "0px", md: "0px" }}
-                            type='email'
+                            type='text'
                             placeholder='mail@simmmple.com'
                             mb='24px'
                             fontWeight='500'
@@ -102,29 +100,55 @@ export default function EditTask() {
                             fontWeight='500'
                             color={textColor}
                             display='flex'>
-                            Password<Text color={brandStars}>*</Text>
+                            Video Title<Text color={brandStars}>*</Text>
                         </FormLabel>
+                        <Input
+                            isRequired={true}
+                            fontSize='sm'
+                            placeholder='Min. 8 characters'
+                            mb='24px'
+                            size='lg'
+                            // type={show ? "text" : "password"}
+                            type="text"
+                            // variant='auth'
+                        />
+
+                        <FormLabel
+                            display='flex'
+                            ms='4px'
+                            fontSize='sm'
+                            fontWeight='500'
+                            color={textColor}
+                            mb='8px'>
+                            Video Description
+                            <Text color={brandStars}>*</Text>
+                        </FormLabel>
+                        <Textarea
+                            isRequired={true}
+                            // variant='auth'
+                            fontSize='sm'
+                            // ms={{ base: "0px", md: "0px" }}
+                            // placeholder='mail@simmmple.com'
+                            mb='24px'
+                            fontWeight='500'
+                            size='lg'
+                        />
                         <InputGroup size='md'>
-                            <Input
-                                isRequired={true}
+                            <Button
                                 fontSize='sm'
-                                placeholder='Min. 8 characters'
-                                mb='24px'
-                                size='lg'
-                                type={show ? "text" : "password"}
-                                variant='auth'
-                            />
-                            <InputRightElement display='flex' alignItems='center' mt='4px'>
-                                <Icon
-                                    color={textColorSecondary}
-                                    _hover={{ cursor: "pointer" }}
-                                    as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                                    onClick={handleClick}
-                                />
-                            </InputRightElement>
+                                variant='brand'
+                                fontWeight='500'
+                                w='20%'
+                                h='50'
+                                mb='24px'>
+                                Submit
+                            </Button>
                         </InputGroup>
                     </FormControl>
                 </Flex>
-            </Flex></DefaultAuth>
+            </Flex>
+            {/* </CardBody> */}
+        </Card>
+        // </DefaultAuth>
     );
 }
