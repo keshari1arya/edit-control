@@ -13,27 +13,27 @@ export class Task {
   @ApiProperty({ description: 'The name of the task' })
   name: string;
 
-  @Column()
+  @Column({nullable:true})
   @ApiProperty({ description: 'The turnaround time for the task' })
   turnAroundTime: Date;
 
-  @Column()
+  @Column({nullable:true})
   @ApiProperty({ description: 'The go-live date for the task' })
   goLiveDate: Date;
 
-  @Column()
+  @Column({nullable:true})
   @ApiProperty({
     description: 'The title of the video associated with the task',
   })
   videoTitle: string;
 
-  @Column()
+  @Column({nullable:true})
   @ApiProperty({
     description: 'The description of the video associated with the task',
   })
   videoDescription: string;
 
-  @Column()
+  @Column({nullable:true})
   @ApiProperty({ description: 'Tags associated with the video' })
   videoTags: string;
 

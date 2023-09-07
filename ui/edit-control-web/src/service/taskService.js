@@ -14,3 +14,7 @@ export async function fetchTasks() {
     throw error; // Rethrow the error for handling in the component
   }
 }
+
+export async function createTask(task){
+  return await axios.post('http://localhost:3010/api/tasks',task);
+}
