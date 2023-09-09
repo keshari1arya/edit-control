@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router, NavigationEnd } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
+import { ITask } from "../models/ITask";
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -11,7 +12,7 @@ export class TaskService {
     constructor(private http: HttpClient) { }
 
     public getTasks() {
-        return this.http.get(this.apiUrl + 'tasks')
+        return this.http.get<ITask[]>(this.apiUrl + 'tasks')
     }
 
 

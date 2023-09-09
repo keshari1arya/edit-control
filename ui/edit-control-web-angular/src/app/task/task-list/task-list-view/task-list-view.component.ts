@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ITask } from 'src/app/models/ITask';
 
 @Component({
   selector: 'app-task-list-view',
@@ -8,18 +9,21 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./task-list-view.component.scss']
 })
 export class TaskListViewComponent implements OnChanges {
+  @Input() tasks: ITask[] | null = []!;
+
+  displayedColumns: string[] = ['name', 'turnAroundTime', 'goLiveDate', 'videoTitle'];
+  dataSource: any
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['tasks']){
+    if (changes['tasks']) {
+      if (this.tasks){
       console.log(this.tasks);
       
+        this.dataSource = new MatTableDataSource<ITask>(this.tasks);
+      }
     }
   }
-
-  @Input() tasks:any;
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 }
 export interface PeriodicElement {
   name: string;
