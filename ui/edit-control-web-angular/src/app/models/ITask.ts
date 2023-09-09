@@ -3,7 +3,7 @@ import { ITaskVideo } from "./ITaskVideo";
 
 // itask.interface.ts
 export interface ITask {
-    id: number;
+    id?: number;
     name: string;
     turnAroundTime?: Date;
     goLiveDate?: Date;
