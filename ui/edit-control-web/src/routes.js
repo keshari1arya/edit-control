@@ -21,6 +21,7 @@ import SignInCentered from "views/auth/signIn";
 import { AddOrEditTask } from "views/task/edit";
 import { ListTask } from "views/task/list";
 import EditTask from "views/task/edit/editTask";
+import { TaskDetail } from "views/task/detail/taskDetail";
 
 const routes = [
   {
@@ -36,6 +37,13 @@ const routes = [
     layout:'/admin',
     path: '/task/new',
     component: EditTask
+  },
+  {
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    name: 'Task Details',
+    layout:'/admin',
+    path: '/task:id',
+    component: TaskDetail
   },
   {
     name: "Main Dashboard",

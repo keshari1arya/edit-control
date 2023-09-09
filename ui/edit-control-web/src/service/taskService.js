@@ -15,6 +15,10 @@ export async function fetchTasks() {
   }
 }
 
-export async function createTask(task){
-  return await axios.post('http://localhost:3010/api/tasks',task);
+export async function createTask(task) {
+  return await axios.post('http://localhost:3010/api/tasks', task);
+}
+
+export async function getTaskById(taskId) {
+  return await axios.get('http://localhost:3010/api/tasks/' + taskId);
 }
