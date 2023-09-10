@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MaterialModule } from '../material.module';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 
 
@@ -18,7 +19,8 @@ import { MaterialModule } from '../material.module';
   declarations: [
     TaskListComponent,
     TaskListViewComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    TaskDetailsComponent
   ],
   imports: [
     CommonModule,

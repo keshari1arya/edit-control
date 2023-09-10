@@ -1,0 +1,24 @@
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.tat {
+    flex-shrink: 0;
+    /* Prevent TAT from shrinking */
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-top: 10px;
+    /* Adjust as needed to control the vertical spacing */
+}
