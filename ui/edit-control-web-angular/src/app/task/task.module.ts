@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MaterialModule } from '../material.module';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import { DropzoneDirective } from '../shared/directives/dropzone.directive';
 
 
 
@@ -20,7 +21,8 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
     TaskListComponent,
     TaskListViewComponent,
     EditTaskComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    DropzoneDirective,
   ],
   imports: [
     CommonModule,

@@ -32,4 +32,14 @@ export class TaskDetailsComponent implements OnInit {
       );
     }
   }
+
+  allFiles: File[] = [];
+
+  droppedFiles(allFiles:any): void {
+    const filesAmount = allFiles.length;
+    for (let i = 0; i < filesAmount; i++) {
+      const file = allFiles[i];
+      this.allFiles.push(file);
+    }
+  }
 }
