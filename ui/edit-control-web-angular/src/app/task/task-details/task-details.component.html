@@ -2,7 +2,8 @@
   <mat-card-header class="card-header">
     <mat-card-title>{{ task?.name }}</mat-card-title>
     <div class="tat">
-      <mat-card-subtitle>TAT: {{ task?.turnAroundTime | date:'dd MMM yyyy' }}</mat-card-subtitle>
+      <mat-card-subtitle>TAT:&nbsp; {{ task?.turnAroundTime | date:'dd MMM yyyy' }}</mat-card-subtitle>
+      <mat-card-subtitle>GO LIVE:&nbsp; {{ task?.turnAroundTime | date:'dd MMM yyyy' }}</mat-card-subtitle>
     </div>
     <!-- <mat-card-subtitle>{{ task?.videoTitle }}</mat-card-subtitle> -->
   </mat-card-header>
@@ -12,50 +13,81 @@
       <p>Video Description: {{ task?.videoDescription }}</p>
     </div>
 
-  </mat-card-content>
-  <mat-card-actions>
-    <mat-card-subtitle>GO LIVE: {{ task?.turnAroundTime | date:'dd MMM yyyy' }}</mat-card-subtitle>
-  </mat-card-actions>
-  <mat-card-actions class="card-actions">
+    <mat-card-title>
+      Submissions.
+    </mat-card-title>
+    <br />
 
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef> Comment </th>
+        <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="isApproved">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.isApproved}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </mat-card-content>
+  <mat-card-actions class="card-actions">
+    <a [routerLink]="['/task']" (click)="$event.stopPropagation()" matButton>
+      Back to list
+    </a>
   </mat-card-actions>
 </mat-card>
-<a [routerLink]="['/task']" (click)="$event.stopPropagation()" matButton>
-  Back to list
-</a>
-<div class="container text-center mt-5">
-  <h3 class="mb-5"> Drop zone angular file drag and drop example. </h3>
-  <!-- Apply DropZone Directive -->﻿
 
-  <div class="dropzone" dropzone (onFileDropped)="droppedFiles($event)">
-    <div class="text-center">
-      Drop files here.<BR>
-      <span class="note needsclick">(This is just a demo dropzone. Selected
-        files are <strong>not</strong> actually uploaded.)</span>
-    </div>
-  </div>
-  <div class="file-table">
-    <h3 class="m-3">List of Files</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">File Name</th>
-          <th scope="col">Size</th>
-          <th scope="col">Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let file of allFiles; let i = index">
-          <th scope="row">{{i+1}}</th>
-          <td>{{file.name}}</td>
-          <td>{{file.size}} Bytes</td>
-          <td>{{file.type}}</td>
-        </tr>
-        <tr class="text-center" *ngIf="allFiles.length === 0">
-          <td colspan="4"><strong>No files are uploaded</strong></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+<div class="col-lg-12">
+  <mat-card class="b-1 shadow-none">
+    <mat-card-content class="b-t-1">
+
+      <!-- <div class="dropzone" dropzone (onFileDropped)="droppedFiles($event)">
+        <div class="text-center">
+          Drop files here.
+        </div>
+      </div> -->
+
+      <!-- Hidden file input element -->
+      <input type="file" style="display: none;" #fileInput (change)="onFileSelected($event)">
+
+      <!-- Button to trigger file selection -->
+      <!-- <button mat-flat-button color="primary" type="button" (click)="fileInput.click()">Select Files</button> -->
+
+      <div class="dropzone" dropzone (onFileDropped)="droppedFiles($event)" (click)="fileInput.click()">
+        <div class="text-center">
+          Drop files here.
+        </div>
+      </div>
+
+
+      <mat-list>
+        <mat-list-item *ngFor="let file of allFiles; let i = index">
+          <span matListItemTitle class="f-s-16 f-w-600">{{file.name}}</span>
+          <!-- <span matListItemLine class="mat-body-1">{{file.type}}</span> -->
+          <span matListItemLine class="mat-body-1">{{file.size}} bytes</span>
+        </mat-list-item>
+        <mat-list-item *ngIf="allFiles.length === 0">
+          <strong>No files are attached</strong>
+        </mat-list-item>
+      </mat-list>
+      <div class="pull-right">
+        <button mat-flat-button color="primary" type="button" (click)="upload()">Upload</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

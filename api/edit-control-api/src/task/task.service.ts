@@ -8,7 +8,7 @@ export class TaskService {
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>,
     @InjectRepository(Task)
     private readonly submissionRepository: Repository<Submission>,
-  ) {}
+  ) { }
 
   async createTask(taskData: Partial<Task>) {
     const task = this.taskRepository.create(taskData);
@@ -35,6 +35,11 @@ export class TaskService {
   async getTaskById(taskId: number) {
     const task = await this.taskRepository.findOne({
       where: { id: taskId },
+      relations: {
+        submissions: {
+          video: true,
+        }
+      }
     });
     return task;
   }

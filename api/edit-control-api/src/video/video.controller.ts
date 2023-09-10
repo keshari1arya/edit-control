@@ -11,15 +11,17 @@ import {
 import { VideoService } from './video.service';
 import { Video } from 'src/entities/video.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { extname, join } from 'path';
 import { diskStorage } from 'multer';
 import { createReadStream } from 'fs';
 import { Response } from 'express';
+import { S3 } from 'aws-sdk';
 
+@ApiTags('video')
 @Controller('video')
 export class VideoController {
-  constructor(private videoService: VideoService) {}
+  constructor(private videoService: VideoService) { }
 
   @Get('')
   public list(): Promise<Video[]> {
@@ -63,4 +65,30 @@ export class VideoController {
     const file = createReadStream(join(process.cwd(), 'package.json'));
     return new StreamableFile(file);
   }
+
+    @ApiOperation({ summary: 'Get a pre-signed URL for uploading a file to AWS S3' })
+    @ApiResponse({ status: 200, description: 'Pre-signed URL generated successfully' })
+    @Get('presigned-upload-url')
+    async getPresignedUploadUrl(): Promise<{ presignedUrl: string }> {
+      const s3 = new S3({
+        // Configure your AWS credentials here (accessKeyId and secretAccessKey)
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET,
+      });
+  
+      const params = {
+        Bucket: process.env.AWS_BUCKET_NAME, // Replace with your S3 bucket name
+        Key: `uploads/${Date.now()}_${Math.floor(Math.random() * 1000)}`, // Unique key for the uploaded file
+        Expires: 3600, // Expiration time for the pre-signed URL in seconds (1 hour in this example)
+        ContentType: 'application/octet-stream', // Set the content type based on the file type you expect
+      };
+  
+      try {
+        const presignedUrl = await s3.getSignedUrlPromise('putObject', params);
+        return { presignedUrl };
+      } catch (error) {
+        console.error('Error generating pre-signed URL:', error);
+        throw new Error('Failed to generate pre-signed URL');
+      }
+    }
 }
