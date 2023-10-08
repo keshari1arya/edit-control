@@ -55,9 +55,9 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   upload() {
-    this.videoService.upload(this.allFiles);
+    this.videoService.upload(this.task?.id!, this.allFiles);
   }
-  onFileSelected(event:any){
-    this.addFiles(event?.target?.files)    
+  onFileSelected(event: any) {
+    this.addFiles(event?.target?.files)
   }
 }

@@ -77,10 +77,12 @@ export class VideoController {
       });
   
       const params = {
-        Bucket: process.env.AWS_BUCKET_NAME, // Replace with your S3 bucket name
+        Bucket: "edit-control-dev", // Replace with your S3 bucket name
         Key: `uploads/${Date.now()}_${Math.floor(Math.random() * 1000)}`, // Unique key for the uploaded file
         Expires: 3600, // Expiration time for the pre-signed URL in seconds (1 hour in this example)
         ContentType: 'application/octet-stream', // Set the content type based on the file type you expect
+        //add file type here
+       // type : JSON.stringify(UploadedFile.type)
       };
   
       try {

@@ -89,4 +89,20 @@ export class TaskController {
   ) {
     return this.taskService.commentSubmission(taskId, submissionId, comment);
   }
+
+  
+  @ApiOperation({ summary: 'Attach video to task' })
+  @ApiResponse({
+    status: 200,
+    description: 'Video attached successfully',
+    type: Submission,
+  })
+  @Put(':taskId/attachVideo')
+  attachVideo(
+    @Param('taskId') taskId: number,
+    @Body() url: string,
+  ) {
+    return this.taskService.attachVideo(taskId, url);
+  }
+  
 }

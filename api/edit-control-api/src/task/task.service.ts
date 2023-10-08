@@ -2,12 +2,15 @@ import { Task } from 'src/entities/task.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Submission } from 'src/entities/submission.entity';
+import { TaskVideo } from 'src/entities/taskvideo.entity';
+import { Video } from 'src/entities/video.entity';
 
 export class TaskService {
   constructor(
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>,
-    @InjectRepository(Task)
-    private readonly submissionRepository: Repository<Submission>,
+    @InjectRepository(Submission) private readonly submissionRepository: Repository<Submission>,
+    @InjectRepository(TaskVideo) private readonly taskVideoRepository: Repository<TaskVideo>,
+    @InjectRepository(Video) private readonly videoRepository: Repository<Video>,
   ) { }
 
   async createTask(taskData: Partial<Task>) {
@@ -76,5 +79,17 @@ export class TaskService {
     await this.submissionRepository.update(submissionId, submission);
     await this.submissionRepository.save(submission);
     return submission;
+  }
+
+  async attachVideo(taskId: number, url: string) {
+    const task = await this.getTaskById(taskId);
+    const taskvideo = new TaskVideo();
+    taskvideo.task = task;
+    taskvideo.video = this.videoRepository.create({ url: url });
+    const vid =await this.videoRepository.save(taskvideo.video);
+    taskvideo.video = vid;
+    const v = this.taskVideoRepository.create(taskvideo);
+
+    await this.taskVideoRepository.save(v);
   }
 }
