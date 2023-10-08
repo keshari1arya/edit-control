@@ -1,9 +1,50 @@
-version: "3"
+version: '3.5'
+
 services:
   postgres:
-    image: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    image: postgres:10.4
     ports:
       - "5432:5432"
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./api/edit-control-api
+    depends_on: 
+      - postgres
+    environment: 
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+      NODE_ENV: development
+      PORT: 3010
+      POSTGRES_HOST: postgres   # Pass PostgreSQL host as an environment variable
+      POSTGRES_PORT: 5432       # Pass PostgreSQL port as an environment variable
+      POSTGRES_USER: postgres   # Pass PostgreSQL user as an environment variable
+      POSTGRES_PASSWORD: postgres   # Pass PostgreSQL password as an environment variable
+      POSTGRES_DB: postgres     # Pass PostgreSQL database name as an environment variable
+    ports:
+      - "3010:3010"
+
+  ui:
+    build:
+      context: ./ui/edit-control-web-angular
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+    # volumes:
+    #   - "/ui/edit-control-web-angular/node_modules"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: nest-pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin4
+    ports:
+      - '5050:80'
+    depends_on:
+      - postgres

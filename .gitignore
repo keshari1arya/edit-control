@@ -47,3 +47,4 @@ test/*.js
 *.map
 .DS_Store
 api/edit-control-api/dist/
+pgdata

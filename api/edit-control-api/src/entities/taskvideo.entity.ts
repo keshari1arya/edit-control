@@ -14,8 +14,4 @@ export class TaskVideo {
   @ManyToOne(() => Video, { eager: true })
   @JoinColumn()
   video: Video;
-  
-  @ManyToOne(() => Video, { eager: true })
-  @JoinColumn()
-  video1: Video;
 }
