@@ -43,6 +43,9 @@ let TaskController = exports.TaskController = class TaskController {
     commentSubmission(taskId, submissionId, comment) {
         return this.taskService.commentSubmission(taskId, submissionId, comment);
     }
+    attachVideo(taskId, url) {
+        return this.taskService.attachVideo(taskId, url);
+    }
 };
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Create a task' }),
@@ -126,6 +129,20 @@ __decorate([
     __metadata("design:paramtypes", [Number, Number, String]),
     __metadata("design:returntype", void 0)
 ], TaskController.prototype, "commentSubmission", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Attach video to task' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Video attached successfully',
+        type: submission_entity_1.Submission,
+    }),
+    (0, common_1.Put)(':taskId/attachVideo'),
+    __param(0, (0, common_1.Param)('taskId')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String]),
+    __metadata("design:returntype", void 0)
+], TaskController.prototype, "attachVideo", null);
 exports.TaskController = TaskController = __decorate([
     (0, swagger_1.ApiTags)('tasks'),
     (0, common_1.Controller)('tasks'),

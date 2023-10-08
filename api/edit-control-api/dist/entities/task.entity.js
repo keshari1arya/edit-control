@@ -27,31 +27,31 @@ __decorate([
     __metadata("design:type", String)
 ], Task.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     (0, swagger_1.ApiProperty)({ description: 'The turnaround time for the task' }),
     __metadata("design:type", Date)
 ], Task.prototype, "turnAroundTime", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     (0, swagger_1.ApiProperty)({ description: 'The go-live date for the task' }),
     __metadata("design:type", Date)
 ], Task.prototype, "goLiveDate", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     (0, swagger_1.ApiProperty)({
         description: 'The title of the video associated with the task',
     }),
     __metadata("design:type", String)
 ], Task.prototype, "videoTitle", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     (0, swagger_1.ApiProperty)({
         description: 'The description of the video associated with the task',
     }),
     __metadata("design:type", String)
 ], Task.prototype, "videoDescription", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     (0, swagger_1.ApiProperty)({ description: 'Tags associated with the video' }),
     __metadata("design:type", String)
 ], Task.prototype, "videoTags", void 0);

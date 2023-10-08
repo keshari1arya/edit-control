@@ -11,4 +11,5 @@ export declare class TaskController {
     getAllTasks(): Promise<Task[]>;
     createSubmission(taskId: number, submission: Submission): Promise<Submission>;
     commentSubmission(taskId: number, submissionId: number, comment: string): Promise<Submission>;
+    attachVideo(taskId: number, url: string): Promise<void>;
 }

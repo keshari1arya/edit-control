@@ -16,10 +16,15 @@ exports.TaskService = void 0;
 const task_entity_1 = require("../entities/task.entity");
 const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
+const submission_entity_1 = require("../entities/submission.entity");
+const taskvideo_entity_1 = require("../entities/taskvideo.entity");
+const video_entity_1 = require("../entities/video.entity");
 let TaskService = exports.TaskService = class TaskService {
-    constructor(taskRepository, submissionRepository) {
+    constructor(taskRepository, submissionRepository, taskVideoRepository, videoRepository) {
         this.taskRepository = taskRepository;
         this.submissionRepository = submissionRepository;
+        this.taskVideoRepository = taskVideoRepository;
+        this.videoRepository = videoRepository;
     }
     async createTask(taskData) {
         const task = this.taskRepository.create(taskData);
@@ -43,6 +48,11 @@ let TaskService = exports.TaskService = class TaskService {
     async getTaskById(taskId) {
         const task = await this.taskRepository.findOne({
             where: { id: taskId },
+            relations: {
+                submissions: {
+                    video: true,
+                }
+            }
         });
         return task;
     }
@@ -72,11 +82,25 @@ let TaskService = exports.TaskService = class TaskService {
         await this.submissionRepository.save(submission);
         return submission;
     }
+    async attachVideo(taskId, url) {
+        const task = await this.getTaskById(taskId);
+        const taskvideo = new taskvideo_entity_1.TaskVideo();
+        taskvideo.task = task;
+        taskvideo.video = this.videoRepository.create({ url: url });
+        const vid = await this.videoRepository.save(taskvideo.video);
+        taskvideo.video = vid;
+        const v = this.taskVideoRepository.create(taskvideo);
+        await this.taskVideoRepository.save(v);
+    }
 };
 exports.TaskService = TaskService = __decorate([
     __param(0, (0, typeorm_2.InjectRepository)(task_entity_1.Task)),
-    __param(1, (0, typeorm_2.InjectRepository)(task_entity_1.Task)),
+    __param(1, (0, typeorm_2.InjectRepository)(submission_entity_1.Submission)),
+    __param(2, (0, typeorm_2.InjectRepository)(taskvideo_entity_1.TaskVideo)),
+    __param(3, (0, typeorm_2.InjectRepository)(video_entity_1.Video)),
     __metadata("design:paramtypes", [typeorm_1.Repository,
+        typeorm_1.Repository,
+        typeorm_1.Repository,
         typeorm_1.Repository])
 ], TaskService);
 //# sourceMappingURL=task.service.js.map

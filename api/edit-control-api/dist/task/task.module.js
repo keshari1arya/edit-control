@@ -14,11 +14,12 @@ const task_entity_1 = require("../entities/task.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const taskvideo_entity_1 = require("../entities/taskvideo.entity");
 const submission_entity_1 = require("../entities/submission.entity");
+const video_entity_1 = require("../entities/video.entity");
 let TaskModule = exports.TaskModule = class TaskModule {
 };
 exports.TaskModule = TaskModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([task_entity_1.Task, taskvideo_entity_1.TaskVideo, submission_entity_1.Submission])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([task_entity_1.Task, taskvideo_entity_1.TaskVideo, submission_entity_1.Submission, video_entity_1.Video])],
         controllers: [task_controller_1.TaskController],
         providers: [task_service_1.TaskService],
     })
